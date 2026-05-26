@@ -18,8 +18,7 @@ def home(request):
                 info = ydl.extract_info(video_link,download=True)
                 video_url=info.get("title")+".mp4"
         except Exception as e:
-             error = "Download Failed"
-         
+             error = str(e)
 
    
     
