@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader By Altamash </title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#141e30,#243b55);
+        }
+
+        .container{
+            width:90%;
+            max-width:500px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            font-size:28px;
+            color:#222;
+            margin-bottom:25px;
+            line-height:1.5;
+        }
+
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+        }
+
+        input{
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#f1f1f1;
+            font-size:16px;
+            outline:none;
+        }
+
+        input:focus{
+            border:2px solid #243b55;
+        }
+
+        button{
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#243b55;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#141e30;
+            transform:scale(1.03);
+        }
+
+        .download-btn{
+            display:inline-block;
+            margin-top:25px;
+            padding:14px 25px;
+            background:green;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .download-btn:hover{
+            background:darkgreen;
+        }
+
+        .error{
+            color:red;
+            margin-top:20px;
+            font-size:17px;
+        }
+
+        footer{
+            margin-top:30px;
+            color:#666;
+            font-size:15px;
+        }
+
+        @media(max-width:600px){
+
+            .container{
+                padding:25px;
+            }
+
+            h1{
+                font-size:22px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>
+            Download Your Videos & Reels From
+            YouTube, Instagram & Facebook
+        </h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input type="text"
+                   name="url"
+                   placeholder="Paste your video link here">
+
+            <button type="submit">
+                Download Video
+            </button>
+
+        </form>
+
+        {% if video %}
+
+            <a href="/media/{{ video }}"
+               class="download-btn"
+               download>
+
+               Download Video
+
+            </a>
+
+        {% endif %}
+
+        {% if error %}
+
+            <p class="error">
+                {{ error }}
+            </p>
+
+        {% endif %}
+
+        <footer>
+            Made by Syed Altamash Ali
+        </footer>
+
+    </div>
+
+</body>
+</html>
